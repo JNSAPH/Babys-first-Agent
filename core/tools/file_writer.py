@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
 from langchain_core.tools import tool
 from langchain_core.messages import ToolMessage
 
 # Docs: https://docs.langchain.com/oss/python/langchain/tools   
+
+logger = logging.getLogger(__name__)
 
 @tool("write_text_file")
 def write_text_file_tool(path: str, text: str) -> str:
@@ -15,13 +18,19 @@ def write_text_file_tool(path: str, text: str) -> str:
         path: The file path where the text should be written.
         text: The text content to write to the file.
     """
-    print("[write_text_file_tool] Writing to file:", path)
+    # Force all paths to /tmp
+    p = Path(path)
+    if p.is_absolute():
+        forced_path = Path("/tmp") / p.relative_to(p.anchor)
+    else:
+        forced_path = Path("/tmp") / p
+    
+    logger.debug(f"> Writing text to file at {forced_path}")
+    
+    # Ensure parent directory exists
+    forced_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    # Write the file
+    forced_path.write_text(text)
 
-    # Make sure the directory is is always in /tmp/
-    target = Path("/tmp") / Path(path).relative_to("/").parent
-    target.mkdir(parents=True, exist_ok=True)
-    file_path = target / Path(path).name    
-    with open(file_path, "w") as f:
-        f.write(text)
-
-    return f"SUCCESS: Text written to {target}" # Return a confirmation message for the model. If this is not returned, the agent may think the tool call failed and try to call it again.
+    return f"SUCCESS: Text written to {forced_path}"
