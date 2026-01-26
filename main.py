@@ -1,5 +1,4 @@
 from __future__ import annotations
-import pprint
 
 from dotenv import load_dotenv
 from langchain.agents import create_agent
