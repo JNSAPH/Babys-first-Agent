@@ -35,3 +35,4 @@ htmlcov/
 
 __pycache__/
 .env
+graph_export.png

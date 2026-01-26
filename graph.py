@@ -45,7 +45,7 @@ if __name__ == "__main__":
     app = build_graph()
     
     result = app.invoke({
-        "messages": [HumanMessage(content="Write a Haiku about nature to /tmp/haiku.txt")],
+        "messages": [HumanMessage(content="Get the weather for Cuxhaven and write it to /tmp/weather.txt")],
         "research": "",
         "summary": ""
     })
