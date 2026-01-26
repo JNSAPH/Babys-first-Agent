@@ -24,5 +24,5 @@ Focus on correctness, safety, and determinism.
 """
 
 StrHumanMessage = """
-Create a note at /tmp/note.txt with all tools you can use in this system and a recipe for fudgy brownies.
+Create a note at /tmp/note.txt with all tools you can use in this system and a recipe for fudgy brownies. You may only use the tool once!
 """
