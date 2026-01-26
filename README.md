@@ -1,0 +1,1 @@
+Minimal LangChain-ready scaffold.
