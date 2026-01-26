@@ -1,6 +1,6 @@
-PYTHON := python3
 VENV := .venv
-ACTIVATE := source $(VENV)/bin/activate
+PYTHON := $(VENV)/bin/python
+PIP := $(VENV)/bin/pip
 
 .PHONY: help venv install run test freeze clean
 
@@ -14,24 +14,22 @@ help:
 	&& echo "  make clean    - remove venv and caches"
 
 venv:
-	$(PYTHON) -m venv $(VENV)
-
-activate:
-	$(ACTIVATE)
+	python3 -m venv $(VENV)
 
 install: venv
-	$(ACTIVATE) && pip install --upgrade pip setuptools wheel
-	$(ACTIVATE) && pip install -r requirements.txt
+	$(PIP) install --upgrade pip setuptools wheel
+	$(PIP) install -r requirements.txt
 
 run:
-	export PYTHONWARNINGS="ignore:Core Pydantic V1 functionality" # Suppress pydantic.v1 deprecation warnings, use Python 3.12 for future development
-	$(ACTIVATE) && PYTHONPATH=src python -m main
+	PYTHONWARNINGS="ignore:Core Pydantic V1 functionality" \
+	PYTHONPATH=src \
+	$(PYTHON) -m main
 
 test:
-	$(ACTIVATE) && PYTHONPATH=src pytest -q
+	PYTHONPATH=src $(PYTHON) -m pytest -q
 
 freeze:
-	$(ACTIVATE) && pip freeze > requirements.txt
+	$(PIP) freeze > requirements.txt
 
 clean:
 	rm -rf $(VENV) __pycache__ */__pycache__ .pytest_cache *.egg-info build dist
