@@ -1,6 +1,6 @@
 import logging
 from core.state import State
-from core.model import model
+from core.model import agent
 
 logger = logging.getLogger(__name__)
 
@@ -9,11 +9,11 @@ def agent_node(state: State) -> dict:
     Agent node that generates responses using the language model.
     Takes the conversation history and generates the next message.
     """
-    logger.debug("> Invoking agent model")
+    logger.debug("> Invoking full agent (tools + structured output)")
+        
+    result = agent.invoke({"messages": state["messages"]})  # Input format for create_agent
+    
+    logger.debug("Structured response: %s", result.get("structured_response"))
+    # logger.debug("LLM Output: %s", result)
 
-    messages = state["messages"]
-    response = model.invoke(messages)
-
-    logger.debug("Latest response: %s", response.content if response else "No response.")
-
-    return {"messages": [response]}
+    return result

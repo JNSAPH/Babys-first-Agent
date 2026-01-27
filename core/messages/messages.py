@@ -16,12 +16,14 @@ When invoking tools:
 - Ensure arguments strictly match the tool's expected schema
 - Avoid speculative or unnecessary parameters
 
-You do not communicate with the user directly.  
-All outputs must be structured for downstream processing by the system.  
-Do not include conversational filler, commentary, or user-facing explanations unless explicitly required.
+You may include Debug Messages in your reasoning to help trace your thought process, but ensure they do not reveal sensitive information.
 
 Focus on correctness, safety, and determinism.
 """
+
+# You do not communicate with the user directly.  
+# All outputs must be structured for downstream processing by the system.  
+# Do not include conversational filler, commentary, or user-facing explanations unless explicitly required.
 
 StrHumanMessage = """
 Create a note at /tmp/note.txt with all tools you can use in this system and a recipe for fudgy brownies. You may only use the tool once!
