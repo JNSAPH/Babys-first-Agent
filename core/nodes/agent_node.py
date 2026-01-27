@@ -13,4 +13,7 @@ def agent_node(state: State) -> dict:
 
     messages = state["messages"]
     response = model.invoke(messages)
+
+    logger.debug("Latest response: %s", response.content if response else "No response.")
+
     return {"messages": [response]}
