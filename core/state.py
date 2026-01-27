@@ -8,6 +8,7 @@ class FinalResponse(BaseModel):
     summary: str = Field(..., description="One-sentence summary")
     weather: str | None = Field(None, description="Weather info if retrieved")
     file_written: bool = Field(default=False, description="File written?")
+    thoughts: str = Field(..., description="Agent's final thoughts about what it did, why it called certain tools, and if it called a tool multiple times, why.")
 
 class State(TypedDict):
     messages: Annotated[List[BaseMessage], add]  # Chat history

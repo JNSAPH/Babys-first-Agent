@@ -59,6 +59,6 @@ if __name__ == "__main__":
     print("\nStructured Response:")
     print(result.get("structured_response", "No structured response."))
 
-    print("\Tokens:")
+    print("\nTokens:")
     print(result.get("used_tokens", "No structured response."))
 

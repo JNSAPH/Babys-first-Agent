@@ -9,7 +9,7 @@ def agent_node(state: State) -> dict:
     Agent node that generates responses using the language model.
     Takes the conversation history and generates the next message.
     """
-    logger.debug("> Invoking full agent (tools + structured output)")
+    logger.debug("> Invoking Agent Node")
         
     result = agent.invoke({"messages": state["messages"]})  # Input format for create_agent
     
