@@ -25,7 +25,7 @@ def write_text_file_tool(path: str, text: str) -> str:
     else:
         forced_path = Path("/tmp") / p
     
-    logger.debug(f"> Writing text to file at {forced_path}")
+    logger.info(f"> Writing text to file at {forced_path}")
     
     # Ensure parent directory exists
     forced_path.parent.mkdir(parents=True, exist_ok=True)

@@ -1,7 +1,11 @@
+import os
+from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from core.tools import write_text_file_tool, get_weather_tool
-from core.state import FinalResponse
+from src.tools import write_text_file_tool, get_weather_tool
+from src.agent.state import FinalResponse
 from langchain.agents import create_agent 
+
+load_dotenv()
 
 tools = [write_text_file_tool, get_weather_tool]
 

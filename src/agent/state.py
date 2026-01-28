@@ -11,8 +11,8 @@ class FinalResponse(BaseModel):
     thoughts: str = Field(..., description="Agent's final thoughts about what it did, why it called certain tools, and if it called a tool multiple times, why.")
 
 class State(TypedDict):
-    messages: Annotated[List[BaseMessage], add]  # Chat history
-    research: str  # Research data
-    summary: str  # Final summary
-    used_tokens: int  # Total tokens used
-    structured_response: FinalResponse | None  # Agent's structured output
+    messages: Annotated[List[BaseMessage], add]
+    research: str = ""
+    summary: str = ""            
+    used_tokens: int = 0
+    structured_response: FinalResponse | None = None
